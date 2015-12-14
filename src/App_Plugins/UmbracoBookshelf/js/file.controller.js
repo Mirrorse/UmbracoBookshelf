@@ -2,6 +2,7 @@
 
     $scope.model = {};
     $scope.model.filePath = decodeURIComponent($routeParams.id);
+    $scope.model.filePathCustom = $scope.model.filePath.substring(0, $scope.model.filePath.lastIndexOf("."));
     $scope.isEditing = false;
     $scope.isSaving = false;
     $scope.hasEdited = false;
