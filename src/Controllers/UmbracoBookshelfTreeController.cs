@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Net.Http.Formatting;
@@ -87,7 +87,7 @@ namespace UmbracoBookshelf.Controllers
                 {
                     var icon = (id == "-1") ? "icon-book" : "icon-folder";
 
-                    var node = CreateTreeNode(orgPath + dir.Name, orgPath, queryStrings, dir.Name, icon, hasChildren);
+                    var node = CreateTreeNode(orgPath + dir.Name, orgPath, queryStrings, dir.Name, icon, hasChildren);					
 
                     node.RoutePath = "/UmbracoBookshelf/UmbracoBookshelfTree/folder/" + dir.FullName.ToWebPath();
 
@@ -110,14 +110,14 @@ namespace UmbracoBookshelf.Controllers
             else
                 fileInfo = dirInfo.GetFiles(FileSearchPattern);
 
-            foreach (var file in fileInfo)
+            foreach (var file in fileInfo.Where(x => x.Name.ToLower() != "readme.md"))
             {
                 if ((file.Attributes & FileAttributes.Hidden) == 0)
                 {
                     if (filterByMultipleExtensions && Array.IndexOf<string>(allowedExtensions, file.Extension.ToLower().Trim('.')) < 0)
                         continue;
 
-                    var node = CreateTreeNode(orgPath + file.Name, orgPath, queryStrings, file.Name, "icon-document", false);
+                    var node = CreateTreeNode(orgPath + file.Name, orgPath, queryStrings, file.Name.Replace(file.Extension,""), "icon-document", false);
 
                     node.RoutePath = "/UmbracoBookshelf/UmbracoBookshelfTree/file/" + file.FullName.ToWebPath();
 
