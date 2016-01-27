@@ -16,7 +16,7 @@
       <name><%= author %></name>
       <website><%= authorUrl %></website>
     </author>
-    <readme><![CDATA[<%= readmeContents %>]]></readme>
+    <readme>Readme files Tada</readme>
   </info>
   <DocumentTypes />
   <Templates />
@@ -29,12 +29,12 @@
   <Actions>
   </Actions>
   <files>
-  	<% files.forEach(function(file) { %>
-  	<file>
-      <guid><%= file.guid %>.<%= file.ext %></guid>
+    <% files.forEach(function(file) { %>
+    <file>
+      <guid><%= file.guid %></guid>
       <orgPath><%= file.dir %></orgPath>
       <orgName><%= file.name %></orgName>
     </file>
-	<% }); %>
+    <% }); %>
   </files>
 </umbPackage>

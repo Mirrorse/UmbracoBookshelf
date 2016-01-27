@@ -1,58 +1,98 @@
-module.exports = function(grunt) {
-
-    // Load the package JSON file
+module.exports = function (grunt) {
+	
+	var path = require('path')
     var pkg = grunt.file.readJSON('package.json');
-
-    // get the root path of the project
-    var projectRoot = 'src/';
-
-    // Load information about the assembly
-    var assembly = grunt.file.readJSON(projectRoot + 'Properties/AssemblyInfo.json');
-
-    // Get the version of the package
-    var version = assembly.informationalVersion ? assembly.informationalVersion : assembly.version;
 
     grunt.initConfig({
         pkg: pkg,
-        copy: {
-            release: {
-                files: [
-                    {
-                        expand: true,
-                        cwd: projectRoot + 'bin/Release/',
-                        src: [
-                            pkg.name + '.dll',
-                            pkg.name + '.xml'
-                        ],
-                        dest: 'files/bin/'
-                    }
-                ]
-            }
+		dest: grunt.option('target') || 'dist',
+		basePath: path.join('<%= dest %>', 'App_Plugins', '<%= pkgMeta.name %>'),
+		pkgMeta: grunt.file.readJSON('config/meta.json'),
+		clean: {
+            files: [
+                'files/**/*.*'
+            ],
+			build: '<%= grunt.config("basePath").substring(0, 4) == "dist" ? "dist/**/*" : "null" %>',
+      		tmp: ['tmp']
         },
-        umbracoPackage: {
-                src: 'files/',
-                dest: 'releases/umbraco',
-                options: {
-                    name: pkg.name,
-                    version: version,
-                    url: pkg.url,
-                    license: pkg.license.name,
-                    licenseUrl: pkg.license.url,
-                    author: pkg.author.name,
-                    authorUrl: pkg.author.url,
-                    readme: pkg.readme,
-                    manifest: 'config/package.xml',
-                    outputName: pkg.name + '.v' + version + '.zip',
-                    sourceDir: 'tmp/umbraco',
-                    outputDir: 'pkg'
-                }
-        }
+        copy: {
+			app_plugins: {
+				cwd: 'src/App_Plugins/UmbracoBookshelf',
+				src: ['**'],
+				dest: '<%= basePath %>',
+				expand: true
+			},
+			dll: {
+				cwd: 'src/bin/',
+				src: pkg.name + '.dll',
+				dest: '<%= dest %>/bin/',
+				expand: true
+			},
+			umbraco: {
+				cwd: '<%= dest %>',
+				src: '**/*',
+				dest: 'tmp/umbraco',
+				expand: true
+			}
+        },
+		umbracoPackage: {
+			dist: {
+				src: 'tmp/umbraco',
+				dest: 'pkg',
+				options: {
+					name: "<%= pkgMeta.name %>",
+					version: '<%= pkgMeta.version %>',
+					url: '<%= pkgMeta.url %>',
+					license: '<%= pkgMeta.license %>',
+					licenseUrl: '<%= pkgMeta.licenseUrl %>',
+					author: '<%= pkgMeta.author %>',
+					authorUrl: '<%= pkgMeta.authorUrl %>',
+					manifest: 'config/package.xml',
+					readme: 'config/readme.txt'
+				}
+			}
+		},
+		assemblyinfo: {
+			options: {
+				files: ['src/UmbracoBookshelf.csproj'],
+				filename: 'AssemblyInfo.cs',
+				info: {
+					version: '<%= (pkgMeta.version.indexOf("-") ? pkgMeta.version.substring(0, pkgMeta.version.indexOf("-")) : pkgMeta.version) %>', 
+					fileVersion: '<%= pkgMeta.version %>'
+				}
+			}
+		},
+
+		msbuild: {
+			options: {
+				stdout: true,
+				verbosity: 'quiet',
+				maxCpuCount: 4,
+				version: 4.0,
+				buildParameters: {
+					WarningLevel: 2,
+					NoWarn: 1607
+				}
+			},
+			dist: {
+				src: ['src/UmbracoBookshelf.csproj'],
+				options: {
+					projectConfiguration: 'Debug',
+					targets: ['Clean', 'Rebuild'],
+				}
+			}
+		}
     });
     
+	
+	grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-umbraco-package');
+    grunt.loadNpmTasks('grunt-dotnet-assembly-info');
+    grunt.loadNpmTasks('grunt-msbuild');
 
-    grunt.registerTask('dev', ['copy', 'umbracoPackage']);
-    grunt.registerTask('default', ['dev']);
+	grunt.registerTask('default', ['clean', 'assemblyinfo', 'msbuild:dist', 'copy:dll', 'copy:app_plugins', ]);
+    grunt.registerTask('umbraco', ['clean:tmp', 'default', 'copy:umbraco', 'umbracoPackage']);
+    
 
 };

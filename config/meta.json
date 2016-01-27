@@ -1,9 +1,9 @@
 {
-	"name": "mUmbracoBookshelfCustomized",
-	"version": "1.0.0",
-	"url": "",
-	"author": "",
-	"authorUrl": "",
+	"name": "UmbracoBookshelf",
+	"version": "1.0.1",
+	"url": "http://www.localhost",
+	"author": "Ana Hirsch",
+	"authorUrl": "http://www.localhost/ana",
 	"license": "MIT",
 	"licenseUrl": "http://opensource.org/licenses/MIT"
 }

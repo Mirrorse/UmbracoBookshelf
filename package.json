@@ -1,6 +1,6 @@
 {
   "name": "UmbracoBookshelf",
-  "url": "",
+  "url": "http://www.mirror.se/temp/temp",
   "license": {
     "name": "MIT",
     "url": "https://github.com/skybrud/Skybrud.Umbraco.GridData/blob/master/LICENSE.md"
@@ -9,10 +9,14 @@
     "name": "Ana Hirsch",
     "url": "http://www.mirror.se"
   },
-  "readme": "",
+  "readme": "Skybrud.Umbraco.GridData is a small package with a strongly, Skybrud.Umbraco.GridData is a small package with a strongly, Skybrud.Umbraco.GridData is a small package with a strongly",
   "devDependencies": {
     "grunt": "~0.4.5",
-    "grunt-contrib-copy": "~0.4.1",    
-    "grunt-umbraco-package": "1.0.0"
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-copy": "^0.4.1",
+    "grunt-dotnet-assembly-info": "^1.0.19",
+    "grunt-msbuild": "^0.3.4",
+    "grunt-template": "^0.2.3",
+    "grunt-umbraco-package": "^1.0.0"
   }
 }
