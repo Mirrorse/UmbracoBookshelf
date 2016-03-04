@@ -9,7 +9,7 @@
     "name": "Ana Hirsch",
     "url": "http://www.mirror.se"
   },
-  "readme": "Skybrud.Umbraco.GridData is a small package with a strongly, Skybrud.Umbraco.GridData is a small package with a strongly, Skybrud.Umbraco.GridData is a small package with a strongly",
+  "readme": "This is a customized UmbracoBookshelf package with editing disabled and some modifications in content display.",
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-contrib-clean": "^0.6.0",

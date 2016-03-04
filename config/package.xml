@@ -16,7 +16,7 @@
       <name><%= author %></name>
       <website><%= authorUrl %></website>
     </author>
-    <readme>Readme files Tada</readme>
+    <readme>This is a customized UmbracoBookshelf package with editing disabled and some modifications in content display.</readme>
   </info>
   <DocumentTypes />
   <Templates />
