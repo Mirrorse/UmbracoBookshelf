@@ -28,6 +28,12 @@ module.exports = function (grunt) {
 				dest: '<%= dest %>/bin/',
 				expand: true
 			},
+			wiki: {
+				cwd: 'src/UmbracoBookshelf/',
+				src: ['**'],
+				dest: '<%= dest %>/UmbracoBookshelf/',
+				expand: true
+			},	
 			umbraco: {
 				cwd: '<%= dest %>',
 				src: '**/*',
@@ -91,7 +97,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-dotnet-assembly-info');
     grunt.loadNpmTasks('grunt-msbuild');
 
-	grunt.registerTask('default', ['clean', 'assemblyinfo', 'msbuild:dist', 'copy:dll', 'copy:app_plugins', ]);
+	grunt.registerTask('default', ['clean', 'assemblyinfo', 'msbuild:dist', 'copy:wiki', 'copy:dll', 'copy:app_plugins', ]);
     grunt.registerTask('umbraco', ['clean:tmp', 'default', 'copy:umbraco', 'umbracoPackage']);
     
 
