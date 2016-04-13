@@ -29,23 +29,20 @@ namespace UmbracoBookshelf.Controllers
         {
             var menu = new MenuItemCollection();
 
-            if (!Helpers.Constants.DISABLE_EDITING)
-            {
+	        if (Helpers.Constants.DISABLE_EDITING) return menu;
 
-                if (!id.EndsWith(Helpers.Constants.MARKDOWN_FILE_EXTENSION))
-                {
-                    menu.Items.Add<ActionNew>("Create");
-                    menu.Items.Add<ActionRefresh>("Reload Nodes");
-                }
+	        if (!id.EndsWith(Helpers.Constants.MARKDOWN_FILE_EXTENSION))
+	        {
+		        menu.Items.Add<ActionNew>("Create");
+		        menu.Items.Add<ActionRefresh>("Reload Nodes");
+	        }
 
-                if (id != "-1")
-                {
-                    menu.Items.Add<ActionMove>("Rename");
-                    menu.Items.Add<ActionDelete>("Delete");
-                }
-            }
+	        if (id == "-1") return menu;
 
-            return menu;
+	        menu.Items.Add<ActionMove>("Rename");
+	        menu.Items.Add<ActionDelete>("Delete");
+
+	        return menu;
         }
 
         protected override TreeNodeCollection GetTreeNodes(string id, FormDataCollection queryStrings)
@@ -91,8 +88,7 @@ namespace UmbracoBookshelf.Controllers
 
                     node.RoutePath = "/UmbracoBookshelf/UmbracoBookshelfTree/folder/" + dir.FullName.ToWebPath();
 
-                    if (node != null)
-                        nodes.Add(node);
+                    nodes.Add(node);
                 }
             }
 
@@ -121,8 +117,7 @@ namespace UmbracoBookshelf.Controllers
 
                     node.RoutePath = "/UmbracoBookshelf/UmbracoBookshelfTree/file/" + file.FullName.ToWebPath();
 
-                    if (node != null)
-                        nodes.Add(node);
+                    nodes.Add(node);
                 }
             }
 

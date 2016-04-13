@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<language alias="sv" intName="Swedish" localName="Svenska" lcid="" culture="sv-SE">
+	<creator>
+		<name>The Umbraco community</name>
+		<link>http://our.umbraco.org/documentation/Extending-Umbraco/Language-Files</link>
+	</creator>
+	<area alias="treeHeaders">
+		<key alias="UmbracoBookshelf">Umbraco Bookshelf</key>
+	</area>
+	<area alias="sections">
+		<key alias="sections_UmbracoBookshelf">Umbraco Bookshelf</key>
+		<key alias="UmbracoBookshelf">Umbraco Bookshelf</key>
+	</area>
+</language>

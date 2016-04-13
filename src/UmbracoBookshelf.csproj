@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -234,6 +235,8 @@
     <Content Include="App_Plugins\UmbracoBookshelf\js\interceptors.js" />
     <Content Include="App_Plugins\UmbracoBookshelf\js\move.controller.js" />
     <Content Include="App_Plugins\UmbracoBookshelf\js\search.controller.js" />
+    <Content Include="App_Plugins\UmbracoBookshelf\lang\sv-SE.xml" />
+    <Content Include="App_Plugins\UmbracoBookshelf\lang\en-GB.xml" />
     <Content Include="App_Plugins\UmbracoBookshelf\package.manifest" />
     <Content Include="App_Plugins\UmbracoBookshelf\views\navigation.html" />
     <Content Include="App_Plugins\UmbracoBookshelf\views\navigation.router.html" />

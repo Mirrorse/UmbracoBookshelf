@@ -1,9 +1,9 @@
 {
 	"name": "UmbracoBookshelf",
 	"version": "1.0.1",
-	"url": "http://www.localhost",
-	"author": "Ana Hirsch",
-	"authorUrl": "http://www.localhost/ana",
+	"url": "http://www.mirror.se",
+	"author": "Mirror AB",
+	"authorUrl": "http://www.mirror.se",
 	"license": "MIT",
 	"licenseUrl": "http://opensource.org/licenses/MIT"
 }
